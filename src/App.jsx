@@ -8,15 +8,17 @@ import Contact from './Pages/Contact.jsx'
 import DefaultLayout from './Layout/DefaultLayout.jsx'
 import NotFound from './Pages/NotFound.jsx'
 import BlankLayout from './Layout/BlankLayout.jsx'
-import Index from './Pages/SecondPages/Index.jsx'
-import Show from './Pages/SecondPages/Show.jsx'
+import Index from './Pages/SecondPages/PostPage.jsx'
+import Show from './Pages/SecondPages/PostDetails.jsx'
+
+import GlobalContext from './context/PostsContext.js'
 
 function App() {
 
-
+  const [characters, setCharacters] = useState()
 
   return (
-    <BrowserRouter>
+    <><GlobalContext.Provider value={{ characters, setCharacters }} /><BrowserRouter>
       <Routes>
         <Route element={<DefaultLayout />}>
           <Route path="/" element={<HomePage />}></Route>
@@ -31,7 +33,8 @@ function App() {
           <Route path='*' Component={NotFound}></Route>
         </Route>
       </Routes>
-    </BrowserRouter>
+    </BrowserRouter></>
+    </GlobalContext.Provider >
   )
 }
 

@@ -1,6 +1,6 @@
 import imageHome from '../assets/harryPotterHome.jpg'
 import style from './HomePage.module.css'
-import Card from '../Components/Card'
+import Card from '../Components/PostCard'
 import { characters } from '../Characters'
 import axios from 'axios'
 import { BASE_API_URI } from '../baseUrl'

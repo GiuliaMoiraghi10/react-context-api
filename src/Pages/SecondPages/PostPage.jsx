@@ -1,4 +1,4 @@
-import Card from '../../Components/Card'
+import Card from '../../Components/PostCard'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { BASE_API_URI } from '../../baseUrl'

@@ -4,7 +4,7 @@ import imgHarry from '../assets/harryPotter.webp'
 import { BASE_API_URI } from '../baseUrl'
 import { Link } from 'react-router-dom'
 import { characters } from '../Characters'
-import Show from '../Pages/SecondPages/Show'
+import Show from '../Pages/SecondPages/PostDetails'
 
 
 export default function Card(props) {
