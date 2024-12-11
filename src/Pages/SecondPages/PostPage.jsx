@@ -1,44 +1,35 @@
-import Card from '../../Components/PostCard'
 import axios from 'axios'
-import { useState, useEffect } from 'react'
-import { BASE_API_URI } from '../../baseUrl'
-import style from './Index.module.css'
-import imageHome from '../../assets/harryPotterHome.jpg'
+import { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import { BASE_API_URI } from '../../baseUrl.js'
+import { characters } from '../../Characters.jsx'
+import placeHolder from '../../assets/harryPotterHome.jpg'
 
-export default function Index() {
+export default function Show() {
 
-    const [characters, setCharacters] = useState([])
-
-    function fetchCharacters() {
-        axios.get(`${BASE_API_URI}/characters`)
-            .then(res => {
-                console.log(res);
-                setCharacters(res.data.characters)
-            })
-            .catch(err => {
-                console.error(err)
-            })
-    }
+    const { id } = useParams()
+    const [characters, setCharacters] = useState(null)
 
     useEffect(() => {
-        fetchCharacters()
-    }, [])
+        axios.get(`${BASE_API_URI}/characters/${id}`)
+            .then(res => {
+                // console.log(res.characters);
+                setCharacters(res.data.characters);
+            })
+            .catch(err => {
+                console.error(err);
+                setCharacters(null);
+            });
+    }, [id]);
+
+    const navigate = useNavigate()
 
     return (
-        <div>
-            <h1 className={style.title}>La magia di Harry Potter</h1>
-            <img className={style.imgHome} src={imageHome} alt="" />
-            <h2 className={style.sub_title}>Scegli il personaggio</h2>
-            <section className={style.container}>
-                <div className={style.row}>
-                    {characters.map((character) => (
-                        <div key={character.id} className={style.col_4}>
-                            <Card name={character.name} image={character.image} />
-                        </div>
-                    ))}
-
-                </div>
-            </section>
-        </div>
+        <main>
+            <div>
+                <button onClick={() => navigate(-1)}>Back</button>
+                <h1>Pagina con dettaglio personaggio {id}</h1>
+            </div>
+        </main>
     )
 }
